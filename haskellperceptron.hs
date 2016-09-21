@@ -1,4 +1,10 @@
--- EXECUTE fileop (repeat (V [0.0, 0.0]) 0.0005 0.0) "processedforpp.csv" to get the final weights
+-- when in GHC, this is what to do:
+-- Prelude> :load "haskellperceptron.hs"
+-- *Main> fileop (repeatClassify 110 (V [0.0, 0.0]) 0.0005 0.0) "extracteddata.csv"
+-- the output should be the final weights 
+-- (note that "extracteddata.csv" can be substituted for a csv file with the
+--  appropriate format i.e. feature values from left to right and 1 or -1
+--  as values for labels in the rightmost column)
 
 -- converts a 2D String array to a 2D Int array 
 stringToIntMatrix :: [[String]] -> [[Int]]
