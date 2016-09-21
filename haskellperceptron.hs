@@ -109,16 +109,3 @@ repeatClassify (n)  w eta z src = let
                                     repeatClassify (n-1) w' eta z src
 
 -- EXECUTE fileop (repeat (V [0.0, 0.0]) 0.0005 0.0) 'processedforpp.csv'
-
--- DON'T LOOK RELEVANT ->
-colTotals :: [[Int]] -> Vector
-colTotals matrix = foldr add (V [0.0,0.0,0.0])
-                   (map intListToVector matrix)
-
-findColTotals :: String -> Vector
-findColTotals s = colTotals (stringToIntMatrix 
-                  (arrayFromString s '\n' ','))
-
-printColTotals :: FilePath -> IO ()
-printColTotals file = fileop findColTotals file
--- DON'T LOOK RELEVANT <-
