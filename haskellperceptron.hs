@@ -1,3 +1,5 @@
+-- EXECUTE fileop (repeat (V [0.0, 0.0]) 0.0005 0.0) "processedforpp.csv" to get the final weights
+
 -- converts a 2D String array to a 2D Int array 
 stringToIntMatrix :: [[String]] -> [[Int]]
 stringToIntMatrix sm = map (map (\x -> read x :: Int)) sm
@@ -93,12 +95,17 @@ perceptron (row:rows) (V w) eta z =
 -- takes the text from a properly formatted CSV file and
 -- executes the a simple perceptron classifier on the data,
 -- with the weights of the perceptron after processing
--- being the output
+-- being the output 
+-- w: initial weights
+-- eta: learning rate
+-- z: threshold for activation function
+-- src: text in a .csv file 
 classify :: Vector -> Double -> Double -> String -> Vector
 classify w eta z src = perceptron
              (stringToDoubMatrix (arrayFromString src '\n' ','))
              w eta z
 
+-- executes classify n times over the dataset
 repeatClassify :: Int -> Vector -> Double -> Double -> String -> Vector
 repeatClassify (0) w eta z src = w
 repeatClassify (n)  w eta z src = let
@@ -107,5 +114,3 @@ repeatClassify (n)  w eta z src = let
                                           w eta z)
                                   in
                                     repeatClassify (n-1) w' eta z src
-
--- EXECUTE fileop (repeat (V [0.0, 0.0]) 0.0005 0.0) 'processedforpp.csv'
